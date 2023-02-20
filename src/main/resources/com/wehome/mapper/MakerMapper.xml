@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.wehome.mapper.MakerMapper">
+  
+  <!-- 제조사 등록 -->
+      <insert id="makerEnroll">
+      
+          insert into maker(makerName, nationId, makerIntro) values(#{makerName}, #{nationId}, #{makerIntro} )
+ 
+      </insert>
+      
+      <!-- 제조사 목록 -->
+    <select id="makerGetList" resultType="com.wehome.model.MakerVO">
+    
+        select  makerId, makerName, nationId, regDate, updateDate
+        from maker 
+        <if test="keyword != null">
+            where makerName like concat('%',#{keyword}, '%')
+        </if>
+        order by makerId desc 
+        limit #{skip}, #{amount}    
+    
+    </select>
+    
+    <!-- 제조사 수 -->
+      <select id="makerGetTotal" resultType="int">
+      
+          select count(*) from maker
+          
+          <if test="keyword != null">
+          
+              where makerName like concat('%', #{keyword}, '%');
+          
+          </if>
+          
+      </select>
+      
+      <!-- 제조사 디테일 페이지 -->
+  	<select id="makerGetDetail" resultType="com.wehome.model.MakerVO">
+  	
+  		select * from maker where makerId = #{makerId}
+  	
+  	</select>
+  	
+  	<!-- 제조사 내용 수정 -->
+	<update id="makerModify">
+	
+		update maker set authorName=#{makerName}, nationId=#{nationId}, authorIntro=#{makerIntro}, updateDate=now() where makerId = #{makerId}
+	
+	</update>
+	
+	<!-- 제조사 정보 삭제 -->
+  	<delete id="makerDelete">
+  	
+  		delete from maker where makerId = #{makerId}
+  	
+  	</delete>
+      
+ </mapper>

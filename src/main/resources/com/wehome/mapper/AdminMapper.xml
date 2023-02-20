@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.wehome.mapper.AdminMapper">
+  	
+  	<!-- 상품 등록 -->
+  	<insert id="goodsEnroll">
+  	
+  		<selectKey resultType="int" keyProperty="goodsId" order="AFTER">
+  		
+  			SELECT LAST_INSERT_ID()
+  		
+  		</selectKey>
+  		
+  		insert into goods(goodsName, makerId, publeYear, publisher, cateCode, goodsPrice, goodsStock, goodsDiscount, goodsIntro, goodsContents)
+  		values(#{goodsName},#{makerId},#{publeYear},#{publisher},#{cateCode},#{goodsPrice},#{goodsStock},#{goodsDiscount},#{goodsIntro},#{goodsContents})
+  		
+  	</insert>
+  	<!-- 카테고리 리스트 -->
+  	<select id="cateList" resultType="com.wehome.model.CateVO">
+  	
+  		select * from goods_cate order by catecode
+  	
+  	</select>
+
+	<!-- 상품 리스트 -->
+	<select id="goodsGetList" resultType="com.wehome.model.GoodsVO">
+	
+		select  goodsId, goodsName,  b.makerName, c.cateName, goodsStock, a.regDate
+		from goods a 
+		left outer join maker b on a.makerId = b.makerId
+		left outer join goods_cate c on a.cateCode = c.cateCode
+		<if test="keyword != null">
+			where (goodsName like concat ('%', #{keyword}, '%'))
+		</if>
+		order by goodsId desc 
+		limit #{skip}, #{amount}		
+	
+	</select>
+  	
+  	<!-- 상품 총 갯수 -->
+  	<select id="goodsGetTotal" resultType="int">
+  	
+  		select count(*) from goods
+  		
+  		<if test="keyword != null">
+  		
+  			where goodsName like concat('%' , #{keyword}, '%')
+  		
+  		</if>
+  	
+  	</select>
+
+	<!-- 상품 조회 페이지 -->
+	<select id="goodsGetDetail" resultType="com.wehome.model.GoodsVO">
+	
+		select goodsId, goodsName, (select makerName from maker where makerId =goods.makerId) makerName, 
+			makerId, publeYear, publisher, cateCode, goodsPrice, goodsStock, goodsDiscount, goodsIntro, goodsContents, regDate, updateDate 
+		from goods where goodsId = #{goodsId}
+	
+	</select>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="goodsModify">
+		
+		update goods set goodsName = #{goodsName}, makerId = #{makerId}, publeYear = #{publeYear}, publisher = #{publisher}, cateCode = ${cateCode}, 
+		goodsPrice = #{goodsPrice}, goodsStock = #{goodsStock}, goodsDiscount = #{goodsDiscount}, goodsIntro = #{goodsIntro}, goodsContents = #{goodsContents}, updateDate = now()
+		where goodsId = ${goodsId}
+		
+	</update>
+	
+	<!-- 상품 정보 삭제 -->
+	<delete id="goodsDelete">
+	
+		delete from goods where goodsId = #{goodsId}
+	
+	</delete>
+	
+	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+	
+		insert into goods_image(goodsId, fileName, uploadPath, uuid) values (#{goodsId}, #{fileName}, #{uploadPath}, #{uuid})
+	
+	</insert>
+	
+	<!-- 지정 상품 이미지 전체 삭제 --> 
+	<delete id="deleteImageAll">
+	
+		delete FROM goods_image where goodsId = #{goodsId}
+	
+	</delete>
+	
+	<!-- 어제자 날자 이미지 리스트 -->
+	<select id="checkFileList" resultType="com.wehome.model.AttachImageVO">
+	
+		select * from goods_image where uploadpath = DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 DAY), '%Y\%m\%d')	
+	
+	</select>
+	
+	<!-- 지정 상품 이미지 정보 얻기 -->
+	<select id="getAttachInfo" resultType="com.wehome.model.AttachImageVO">
+	
+		select * from goods_image where goodsId = #{goodsId}
+	
+	</select>
+	
+	
+  </mapper>
