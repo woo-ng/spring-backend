@@ -27,7 +27,7 @@ public class AdminMapperTests {
 		BookVO book = new BookVO();
 		
 		book.setBookName("mapper 테스트");
-		book.setAuthorId(123);
+		book.setMakerId(123);
 		book.setPubleYear("2021-03-18");
 		book.setPublisher("출판사");
 		book.setCateCode("0231");

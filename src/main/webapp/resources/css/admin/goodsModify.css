@@ -149,7 +149,7 @@ input[name='publeYear'] {
 }
 
 
-.authorId_btn {						/* 제작사 선택 css 설정 */
+.makerId_btn {						/* 제작사 선택 css 설정 */
     margin-left: 20px;
     width: 14%;
     height: 38px;
@@ -158,7 +158,7 @@ input[name='publeYear'] {
     font-size: 15px;
     cursor:pointer;
 }
-#authorName_input {
+#makerName_input {
     width: 80%;
     text-align: center;
 }

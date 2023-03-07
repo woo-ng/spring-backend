@@ -147,8 +147,8 @@
 												${list.bookName}
 											</a>
 										</div>
-										<div class="author">
-											${list.authorName} 지음 | ${list.publisher} | ${list.publeYear}
+										<div class="maker">
+											${list.makerName} 지음 | ${list.publisher} | ${list.publeYear}
 										</div>
 									</td>
 									<td class="info">

@@ -12,12 +12,11 @@ import com.wehome.model.MakerVO;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class MakerServiceTests {
     
-    /*AuthoreService 의존성 주입*/
     @Autowired
     private MakerService service;
     
     @Test
-    public void authorEnrollTest() throws Exception {
+    public void makerEnrollTest() throws Exception {
  
         MakerVO maker = new MakerVO();
         

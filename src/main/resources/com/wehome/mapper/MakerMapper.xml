@@ -47,7 +47,7 @@
   	<!-- 제조사 내용 수정 -->
 	<update id="makerModify">
 	
-		update maker set authorName=#{makerName}, nationId=#{nationId}, authorIntro=#{makerIntro}, updateDate=now() where makerId = #{makerId}
+		update maker set makerName=#{makerName}, nationId=#{nationId}, makerIntro=#{makerIntro}, updateDate=now() where makerId = #{makerId}
 	
 	</update>
 	

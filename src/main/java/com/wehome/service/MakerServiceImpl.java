@@ -22,9 +22,9 @@ public class MakerServiceImpl implements MakerService{
     MakerMapper makerMapper;
 	
 	@Override
-    public void makerEnroll(MakerVO author) throws Exception {
+    public void makerEnroll(MakerVO maker) throws Exception {
         
-		makerMapper.makerEnroll(author);
+		makerMapper.makerEnroll(maker);
         
     }
 

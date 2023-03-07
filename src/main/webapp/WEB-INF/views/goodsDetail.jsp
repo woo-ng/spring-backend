@@ -104,9 +104,9 @@
 					</div>
 					<div class="line">
 					</div>
-					<div class="author">
+					<div class="maker">
 						 <span>
-						 	${goodsInfo.authorName} 지음
+						 	${goodsInfo.makerName} 지음
 						 </span>
 						 <span>|</span>
 						 <span>

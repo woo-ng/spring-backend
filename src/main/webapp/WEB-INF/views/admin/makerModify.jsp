@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorModify.css">
+<link rel="stylesheet" href="../resources/css/admin/makerModify.css">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -19,13 +19,13 @@
                 <div class="admin_content_wrap">
                     <div class="admin_content_subject"><span>제작사 상세</span></div>
                     <div class="admin_content_main">
-                    	<form id="modifyForm" action="/admin/authorModify" method="post">
+                    	<form id="modifyForm" action="/admin/makerModify" method="post">
 	                   		<div class="form_section">
 	                   			<div class="form_section_title">
 	                   				<label>제작사 번호</label>
 	                   			</div>
 	                   			<div class="form_section_content">
-	                   				<input class="input_block" name="authorId" readonly="readonly" value="<c:out value='${authorInfo.authorId }'></c:out>">
+	                   				<input class="input_block" name="makerId" readonly="readonly" value="<c:out value='${makerInfo.makerId }'></c:out>">
 	                   			</div>
 	                   		</div>                    
 	                   		<div class="form_section">
@@ -33,8 +33,8 @@
 	                   				<label>제작사 이름</label>
 	                   			</div>
 	                   			<div class="form_section_content">
-	                   				<input name="authorName" value="<c:out value='${authorInfo.authorName }'></c:out>" >
-	                   				<span id="warn_authorName">제작사 이름을 입력 해주세요.</span>
+	                   				<input name="makerName" value="<c:out value='${makerInfo.makerName }'></c:out>" >
+	                   				<span id="warn_makerName">제작사 이름을 입력 해주세요.</span>
 	                   			</div>
 	                   		</div>
 	                   		<div class="form_section">
@@ -44,18 +44,18 @@
 	                   			<div class="form_section_content">
 	                   				<select name="nationId" >
 	                   					<option value="none" disabled="disabled">=== 선택 ===</option>
-	                   					<option value="01" <c:out value=" ${authorInfo.nationId eq '01' ?'selected':''}"/>>국내</option>
-	                   					<option value="02" <c:out value=" ${authorInfo.nationId eq '02' ?'selected':''}"/>>국외</option>
+	                   					<option value="01" <c:out value=" ${makerInfo.nationId eq '01' ?'selected':''}"/>>국내</option>
+	                   					<option value="02" <c:out value=" ${makerInfo.nationId eq '02' ?'selected':''}"/>>국외</option>
 	                   				</select>
 	                   			</div>
 	                   		</div>
 	                   		<div class="form_section">
 	                   			<div class="form_section_title">
-	                   				<label>제작사 소개</label>
+	                   				<label>제작사소개</label>
 	                   			</div>
 	                   			<div class="form_section_content">
-	                   				<textarea name="authorIntro" ><c:out value='${authorInfo.authorIntro }'/></textarea>
-	                   				<span id="warn_authorIntro">제작사 소개를 입력 해주세요.</span>
+	                   				<textarea name="makerIntro" ><c:out value='${makerInfo.makerIntro }'/></textarea>
+	                   				<span id="warn_makerIntro">제작사 소개를 입력 해주세요.</span>
 	                   			</div>
 	                   		</div>
 	                   		<div class="form_section">
@@ -63,7 +63,7 @@
 	                   				<label>등록 날짜</label>
 	                   			</div>
 	                   			<div class="form_section_content">
-	                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${authorInfo.regDate}" pattern="yyyy-MM-dd"/>">
+	                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${makerInfo.regDate}" pattern="yyyy-MM-dd"/>">
 	                   			</div>
 	                   		</div>
 	                   		<div class="form_section">
@@ -71,7 +71,7 @@
 	                   				<label>수정 날짜</label>
 	                   			</div>
 	                   			<div class="form_section_content">
-	                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${authorInfo.updateDate}" pattern="yyyy-MM-dd"/>">
+	                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${makerInfo.updateDate}" pattern="yyyy-MM-dd"/>">
 	                   			</div>
 	                   		</div>
 	                 		<div class="btn_section">
@@ -84,7 +84,7 @@
                 </div>
                 
                 <form id="moveForm" method="get">
-                	<input type="hidden" name="authorId" value='<c:out value="${authorInfo.authorId }"/>'>
+                	<input type="hidden" name="makerId" value='<c:out value="${makerInfo.makerId }"/>'>
                 	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
                 	<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>' >
                 	<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
@@ -104,7 +104,7 @@ $("#cancelBtn").on("click", function(e){
 	
 	e.preventDefault();
 			
-	moveForm.attr("action", "/admin/authorDetail")
+	moveForm.attr("action", "/admin/makerDetail")
 	moveForm.submit();
 	
 });
@@ -113,8 +113,8 @@ $("#cancelBtn").on("click", function(e){
 $("#deleteBtn").on("click", function(e){
 	e.preventDefault();
 	moveForm.find("input").remove();
-	moveForm.append('<input type="hidden" name="authorId" value="${authorInfo.authorId}">');
-	moveForm.attr("action", "/admin/authorDelete");
+	moveForm.append('<input type="hidden" name="makerId" value="${makerInfo.makerId}">');
+	moveForm.attr("action", "/admin/makerDelete");
 	moveForm.attr("method", "post");
 	moveForm.submit();
 });
@@ -123,24 +123,24 @@ $("#deleteBtn").on("click", function(e){
 /* 제작사 수정 버튼 작동 및 유효성 검사 */
 $("#modifyBtn").on("click", function(e){
 
-	let authorName = $(".form_section_content input[name='authorName']").val();
-	let authorIntro = $(".form_section_content textarea").val();		
+	let makerName = $(".form_section_content input[name='makerName']").val();
+	let makerIntro = $(".form_section_content textarea").val();		
 
 	let	nameCk = false;
 	let introCk = false;		
 	
 	e.preventDefault();
 	
-	if(!authorName){
-		$("#warn_authorName").css("display", "block");
+	if(!makerName){
+		$("#warn_makerName").css("display", "block");
 	} else {
-		$("#warn_authorName").css("display", "none");
+		$("#warn_makerName").css("display", "none");
 		nameCk = true;
 	}
-	if(!authorIntro){
-		$("#warn_authorIntro").css("display", "block");
+	if(!makerIntro){
+		$("#warn_makerIntro").css("display", "block");
 	} else {
-		$("#warn_authorIntro").css("display", "none");
+		$("#warn_makerIntro").css("display", "none");
 		introCk = true;
 	}
 

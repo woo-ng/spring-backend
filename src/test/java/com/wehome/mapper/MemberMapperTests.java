@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.wehome.model.MemberVO;
@@ -18,7 +17,7 @@ public class MemberMapperTests {
 
 	@Autowired
 	private MemberMapper membermapper;			//MemberMapper.java 인터페이스 의존성 주입
-	
+
 	
 	//회원가입 쿼리 테스트 메서드
 	@Test
@@ -49,7 +48,6 @@ public class MemberMapperTests {
 	}
 	*/
 	
-	/*
 	// 로그인 쿼리 mapper 메서드 테스트
     @Test
     public void memberLogin() throws Exception{
@@ -58,7 +56,7 @@ public class MemberMapperTests {
         
         // 올바른 아이디 비번 입력경우
         member.setMemberId("test2");
-        member.setMemberPw("test2");
+        member.setMemberPw(pwEncoder.encode("test2"));
         
         // 올바른 않은 아이디 비번 입력경우 
         //member.setMemberId("test1123");
@@ -68,5 +66,4 @@ public class MemberMapperTests {
         System.out.println("결과 값 : " + membermapper.memberLogin(member));
         
     }
-    */
 }

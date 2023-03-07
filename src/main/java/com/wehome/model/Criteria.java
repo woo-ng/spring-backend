@@ -21,7 +21,7 @@ public class Criteria {
     private String keyword;
     
     /* 제작사 리스트 */
-	private String[] authorArr;
+	private String[] makerArr;
 	
 	/* 카테고리 코드 */
 	private String cateCode;

@@ -49,7 +49,7 @@ public class GoodsServiceImpl implements GoodsService{
 		
 		for(String t : typeArr) {
 			if(t.equals("A")) {
-				cri.setAuthorArr(makerArr);
+				cri.setMakerArr(makerArr);
 			}
 		}	
 		
@@ -110,7 +110,7 @@ public class GoodsServiceImpl implements GoodsService{
 				if(makerArr.length == 0) {
 					return filterInfoList;
 				}
-				cri.setAuthorArr(makerArr);
+				cri.setMakerArr(makerArr);
 			}
 		}
 		

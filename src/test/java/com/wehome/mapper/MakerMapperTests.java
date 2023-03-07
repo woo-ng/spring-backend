@@ -23,15 +23,15 @@ public class MakerMapperTests {
     /* 제작사 등록 테스트 */
     /*
     @Test
-    public void authorEnroll() throws Exception{
+    public void makerEnroll() throws Exception{
         
-        AuthorVO author = new AuthorVO();
+        MakerVO maker = new MakerVO();
         
-        author.setNationId("01");
-        author.setAuthorName("테스트");
-        author.setAuthorIntro("테스트 소개");
+        maker.setNationId("01");
+        maker.setMakerName("테스트");
+        maker.setMakerIntro("테스트 소개");
         
-        mapper.authorEnroll(author);
+        mapper.makerEnroll(maker);
         
     }    
     */
@@ -39,11 +39,11 @@ public class MakerMapperTests {
     /* 제작사 목록 테스트 */
     /*
     @Test
-    public void authorGetListTest() throws Exception{
+    public void makerGetListTest() throws Exception{
         
         Criteria cri = new Criteria(3,10);    // 3페이지 & 10개 행 표시
         cri.setKeyword("홍준");
-        List<AuthorVO> list = mapper.authorGetList(cri);
+        List<MakerVO> list = mapper.makerGetList(cri);
         
         for(int i = 0; i < list.size(); i++) {
             System.out.println("list" + i + ".........." + list.get(i));
@@ -55,12 +55,12 @@ public class MakerMapperTests {
     /* 제작사 총 수 */
     /*
     @Test
-    public void authorGetTotalTest() throws Exception{
+    public void makerGetTotalTest() throws Exception{
     	
     	Criteria cri = new Criteria();
     	cri.setKeyword("난도");
     	
-    	int total = mapper.authorGetTotal(cri);
+    	int total = mapper.makerGetTotal(cri);
     	
     	System.out.println("total..............." + total);
     }
@@ -69,13 +69,13 @@ public class MakerMapperTests {
     /* 제작사 상세 페이지 */
 	/*
     @Test
-	public void authorGetDetailTest() {
+	public void makerGetDetailTest() {
 		
-		int authorId = 20;
+		int makerId = 20;
 		
-		AuthorVO author = mapper.authorGetDetail(authorId);
+		MakerVO maker = mapper.makerGetDetail(makerId);
 		
-		System.out.println("author......." + author);
+		System.out.println("maker......." + maker);
 		
 	}
 	*/
@@ -101,12 +101,12 @@ public class MakerMapperTests {
     
     /* 제작사 정보 삭제 */
 	@Test
-	public void authorDeleteTest() {
+	public void makerDeleteTest() {
 		
 		
-		int authorId = 5;
+		int makerId = 5;
 		
-		int result = mapper.makerDelete(authorId);
+		int result = mapper.makerDelete(makerId);
 		
 		if(result == 1) {
 			System.out.println("삭제 성공");

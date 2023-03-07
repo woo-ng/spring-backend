@@ -116,9 +116,9 @@ public class AdminController {
         List list = makerService.makerGetList(cri);
 
         if(!list.isEmpty()) {
-			model.addAttribute("list",list);	// 작가 존재 경우
+			model.addAttribute("list",list);	// 제작사 존재 경우
 		} else {
-			model.addAttribute("listCheck", "empty");	// 작가 존재하지 않을 경우
+			model.addAttribute("listCheck", "empty");
 		}
         
         /* 페이지 이동 인터페이스 데이터 */
@@ -187,7 +187,7 @@ public class AdminController {
  
         logger.info("makerEnroll :" +  maker);
         
-        makerService.makerEnroll(maker);      // 작가 등록 쿼리 수행
+        makerService.makerEnroll(maker);      // 제작사 등록 쿼리 수행
         
         rttr.addFlashAttribute("enroll_result", maker.getMakerName());
         
@@ -201,10 +201,10 @@ public class AdminController {
 		
 		logger.info("makerDetail......." + makerId);
 		
-		/* 작가 관리 페이지 정보 */
+		/* 제작사 관리 페이지 정보 */
 		model.addAttribute("cri", cri);
 		
-		/* 선택 작가 정보 */
+		/* 선택 제작사 정보 */
 		model.addAttribute("makerInfo", makerService.makerGetDetail(makerId));
 		
 	}
@@ -265,7 +265,7 @@ public class AdminController {
 		return "redirect:/admin/goodsManage";
 	}
 	
-	/* 작가 검색 팝업창 */
+	/* 제작사 검색 팝업창 */
 	@GetMapping("/makerPop")
 	public void makerPopGET(Criteria cri, Model model) throws Exception{
 		
@@ -277,9 +277,9 @@ public class AdminController {
 		List list = makerService.makerGetList(cri);
 		
 		if(!list.isEmpty()) {
-			model.addAttribute("list",list);	// 작가 존재 경우
+			model.addAttribute("list",list);	// 제작사 존재 경우
 		} else {
-			model.addAttribute("listCheck", "empty");	// 작가 존재하지 않을 경우
+			model.addAttribute("listCheck", "empty");
 		}
 		
 		
