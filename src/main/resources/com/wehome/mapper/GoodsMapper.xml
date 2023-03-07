@@ -145,7 +145,7 @@
 	<select id="getGoodsInfo" resultType="com.wehome.model.GoodsVO">
 	
 			select a.GOODSID, a.GOODSNAME, a.MAKERID, b.MAKERNAME, a.PUBLEYEAR, a.PUBLISHER, a.CATECODE, c.CATENAME, a.GOODSPRICE, a.GOODSSTOCK, a.GOODSDISCOUNT, a.GOODSINTRO, a.GOODSCONTENTS
-			from goods a left outer join MAKER b on a.makerId = b.makerId
+			from goods a left outer join maker b on a.makerId = b.makerId
 			left outer join goods_cate c on a.catecode = c.catecode
 			where goodsId = #{goodsId}
 	
