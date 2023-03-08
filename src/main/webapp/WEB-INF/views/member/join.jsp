@@ -239,8 +239,9 @@ $(".mail_check_button").click(function(){
 	
 	$.ajax({
         
-        type:"GET",
-        url:"mailCheck?email=" + email,
+        type:"POST",
+        url:"mailCheck",
+        data: jQuery.param({ email }),
         success:function(data){
         	// console.log("data : " + data);
         	cehckBox.attr("disabled",false);

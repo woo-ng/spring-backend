@@ -1,5 +1,6 @@
 package com.wehome.controller;
 
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -45,7 +46,7 @@ public class MemberController {
 	
 	//회원가입
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String joinPOST(MemberVO member) throws Exception{
+	public String joinPOST(@RequestBody MemberVO member) throws Exception{
 			
 		String rawPw = "";            // 인코딩 전 비밀번호
         String encodePw = "";        // 인코딩 후 비밀번호
@@ -93,10 +94,11 @@ public class MemberController {
 	} // memberIdChkPOST() 종료
 	
 	/* 이메일 인증 */
-    @RequestMapping(value="/mailCheck", method=RequestMethod.GET)
+    @PostMapping(value="/mailCheck")
     @ResponseBody
-    public String mailCheckGET(String email) throws Exception{
-        
+    public String mailCheckGET(@RequestBody Map<String, String> body) throws Exception{
+        String email = body.get("email");
+
         /* 뷰(View)로부터 넘어온 데이터 확인 */
         logger.info("이메일 데이터 전송 확인");
         logger.info("인증번호 : " + email);
@@ -137,7 +139,7 @@ public class MemberController {
     
     /* 로그인 */
     @PostMapping(value="login.do", consumes="application/json")
-    public ResponseEntity loginPOST(HttpSession session, MemberVO member) throws Exception{
+    public ResponseEntity loginPOST(HttpSession session, @RequestBody MemberVO member) throws Exception{
         String rawPw = "";
         String encodePw = "";
         System.out.println(member);
