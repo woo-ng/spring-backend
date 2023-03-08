@@ -6,7 +6,9 @@
   
   <!-- 제조사 등록 -->
       <insert id="makerEnroll">
-      
+          <selectKey resultType="int" keyProperty="makerId" order="AFTER">
+              SELECT LAST_INSERT_ID()
+          </selectKey>
           insert into maker(makerName, nationId, makerIntro) values(#{makerName}, #{nationId}, #{makerIntro} )
  
       </insert>

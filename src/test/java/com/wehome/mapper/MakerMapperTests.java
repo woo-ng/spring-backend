@@ -2,7 +2,7 @@ package com.wehome.mapper;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,19 +11,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.wehome.model.MakerVO;
 import com.wehome.model.Criteria;
 
+import static org.junit.Assert.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class MakerMapperTests {
  
     @Autowired
     private MakerMapper mapper;
-    
-    
-    
+
+    private int makerId;
+
     /* 제작사 등록 테스트 */
-    /*
-    @Test
-    public void makerEnroll() throws Exception{
+    @Before
+    public void makerEnrollTest() throws Exception{
         
         MakerVO maker = new MakerVO();
         
@@ -32,9 +33,8 @@ public class MakerMapperTests {
         maker.setMakerIntro("테스트 소개");
         
         mapper.makerEnroll(maker);
-        
-    }    
-    */
+        makerId = maker.getMakerId();
+    }
     
     /* 제작사 목록 테스트 */
     /*
@@ -78,39 +78,27 @@ public class MakerMapperTests {
 		System.out.println("maker......." + maker);
 		
 	}
-	*/
     
     
-//	/* 제작사 정보 수정 */
-//	@Test
-//	public void authorModifyTest() {
-//		
-//		AuthorVO author = new AuthorVO();
-//				
-//		author.setAuthorId(1);
-//		System.out.println("수정 전...................." + mapper.authorGetDetail(author.getAuthorId()));
-//		
-//		author.setAuthorName("수정");
-//		author.setNationId("01");
-//		author.setAuthorIntro("소개 수정 하였습니다.");
-//		
-//		mapper.authorModify(author);
-//		System.out.println("수정 후...................." + mapper.authorGetDetail(author.getAuthorId()));
-//		
-//	}
+	/* 제작사 정보 수정 */
+	@Test
+	public void makerModifyTest() {
+		MakerVO maker = new MakerVO();
+
+		maker.setMakerId(makerId);
+
+		maker.setMakerName("수정");
+		maker.setNationId("01");
+		maker.setMakerIntro("소개 수정 하였습니다.");
+
+		mapper.makerModify(maker);
+		assertEquals("수정", maker.getMakerName());
+	}
     
     /* 제작사 정보 삭제 */
-	@Test
-	public void makerDeleteTest() {
-		
-		
-		int makerId = 5;
-		
+	@After
+	public void makerDeleteTest() throws Exception {
 		int result = mapper.makerDelete(makerId);
-		
-		if(result == 1) {
-			System.out.println("삭제 성공");
-		}
-		
+        assertEquals(1, result);
 	}
 }
