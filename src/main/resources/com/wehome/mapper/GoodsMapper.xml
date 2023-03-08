@@ -36,7 +36,7 @@
 	<!-- 상품 검색 -->
 	<select id="getGoodsList" resultType="com.wehome.model.GoodsVO">
 	
-			select  goodsId, goodsName, b.makerName, a.makerId, c.cateName, a.cateCode, publisher, publeYear, goodsPrice, goodsDiscount, a.regDate, a.updateDate
+			select  goodsId, goodsName, b.makerName, a.makerId, c.cateName, a.cateCode, publisher, publeYear, goodsPrice, goodsDiscount,image_url
 			from goods a left outer join maker b on a.makerId = b.makerId
 			left outer join goods_cate c on a.cateCode = c.cateCode
 			<include refid="criteria"></include>

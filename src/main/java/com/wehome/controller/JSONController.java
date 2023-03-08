@@ -18,12 +18,19 @@ public class JSONController {
 	private GoodsService goodsService;
 	@Autowired
 	private GoodsMapper goodsMapper;
+
+	@GetMapping("/feed.json")
+	public HashMap<String, Object> feed(Criteria criteria) {
+		System.out.println(criteria);
+		List<GoodsVO> goods = goodsMapper.getGoodsList(criteria);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("productions", goods);
+		return map;
+	}
 	
 	@GetMapping("/self.json")
 	public HashMap<String, Object> self() {
-		List<GoodsVO> goods = goodsMapper.getGoodsList(new Criteria(1, 20));
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("productions", goods);
 		return map;
 	}
 }

@@ -55,4 +55,7 @@ public class GoodsVO {
 	
 	/* 이미지 정보 */
 	private List<AttachImageVO> imageList;
+
+	/* 이미지 사진 */
+	private String image_url;
 }
