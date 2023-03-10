@@ -1,9 +1,11 @@
 package com.wehome.mapper;
 
+import lombok.extern.log4j.Log4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -11,6 +13,7 @@ import com.wehome.model.MemberVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@Log4j
 public class MemberMapperTests {
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
@@ -31,9 +34,12 @@ public class MemberMapperTests {
 		member.setMemberAddr1("test2");		//회원 우편번호
 		member.setMemberAddr2("test2");		//회원 주소
 		member.setMemberAddr3("test2");		//회원 상세주소
-		
-		membermapper.memberJoin(member);	//쿼리 메서드 실행
-		
+
+		try {
+			membermapper.memberJoin(member);    //쿼리 메서드 실행
+		} catch(DuplicateKeyException e) {
+			log.error(e.getMessage());
+		}
 	}
 	
 	
@@ -61,9 +67,9 @@ public class MemberMapperTests {
         // 올바른 않은 아이디 비번 입력경우 
         //member.setMemberId("test1123");
         //member.setMemberPw("test1321321");
-        
-        membermapper.memberLogin(member);
-        System.out.println("결과 값 : " + membermapper.memberLogin(member));
+
+		member = membermapper.memberLogin(member);
+        System.out.println("결과 값 : " + member);
         
     }
 }
